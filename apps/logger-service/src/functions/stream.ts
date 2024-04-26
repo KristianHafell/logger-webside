@@ -1,4 +1,3 @@
-import * as dyn from "@logger/logger-sdk";
 import { ApiGatewayManagementApiClient, PostToConnectionCommand } from "@aws-sdk/client-apigatewaymanagementapi";
 
 const connection: any = {};
@@ -13,7 +12,7 @@ export async function handler(event: any) {
             if (connection.endpoint === undefined) {
                 return {
                     statusCode: 404,
-                    body: JSON.stringify({message: "Not found"})
+                    body: JSON.stringify({message: "not found"})
                 };
             }
             const apigwManagmentAPI = new ApiGatewayManagementApiClient({ 
@@ -44,6 +43,7 @@ export async function handler(event: any) {
             console.log("event.requestContext.connectionId: ", event.requestContext.connectionId);
             connection.endpoint = "https://" + event.requestContext.domainName + "/" + event.requestContext.stage;
             connection.ConnectionId = event.requestContext.connectionId
+            console.log("connection: ", connection);
             if (event.requestContext.routeKey === "$connect") {
                 
                 console.log("websocket connect");
@@ -71,7 +71,6 @@ export async function handler(event: any) {
                 };
                 const command = new PostToConnectionCommand(input);
                 await apigwManagmentAPI.send(command);
-
                 return {
                     statusCode: 200,
                     body: JSON.stringify({message: "sendmessage"})
