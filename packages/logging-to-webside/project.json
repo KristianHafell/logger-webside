@@ -1,0 +1,8 @@
+{
+  "name": "logging-to-webside",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/logging-to-webside/src",
+  "projectType": "library",
+  "tags": [],
+  "targets": {}
+}
