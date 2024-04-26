@@ -1,0 +1,56 @@
+{
+  "name": "learn-test",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/learn-test/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/learn-test",
+        "format": ["cjs"],
+        "bundle": false,
+        "main": "apps/learn-test/src/main.ts",
+        "tsConfig": "apps/learn-test/tsconfig.app.json",
+        "assets": ["apps/learn-test/src/assets"],
+        "generatePackageJson": true,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "learn-test:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "learn-test:build:development"
+        },
+        "production": {
+          "buildTarget": "learn-test:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

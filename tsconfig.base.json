@@ -16,12 +16,8 @@
     "baseUrl": ".",
     "resolveJsonModule": true,
     "paths": {
-      "@logger/logger-sdk": [
-        "packages/logger-sdk/src/index.ts"
-      ],
-      "@logger/logging-to-webside": [
-        "packages/logging-to-webside/src/index.ts"
-      ]
+      "@logger/logger-sdk": ["packages/logger-sdk/src/index.ts"],
+      "@logger/logging-to-webside": ["packages/logging-to-webside/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
