@@ -35,7 +35,7 @@ export default {
   },
   setup() {
     const url = import.meta.env.VITE_BASE_URL; // Get the API URL from the environment variables
-    const socket = new WebSocket("wss://aetdm1alc2.execute-api.eu-north-1.amazonaws.com/dev"); // Create a new WebSocket connection
+    const socket = new WebSocket("wss://jyb0pgmaq3.execute-api.eu-north-1.amazonaws.com/dev"); // Create a new WebSocket connection
     const messages = ref([]);
 
     // Event listeners for WebSocket events
