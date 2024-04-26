@@ -1,0 +1,131 @@
+{
+  "name": "logger-service",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/logger-service/src",
+  "projectType": "application",
+  "targets": {
+    "buildSet": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/logger-service",
+        "format": ["cjs"],
+        "bundle": true,
+        "main": "apps/logger-service/src/functions/set.ts",
+        "tsConfig": "apps/logger-service/tsconfig.app.json",
+        "assets": ["apps/logger-service/src/assets"],
+        "generatePackageJson": false,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "buildGet": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/logger-service",
+        "format": ["cjs"],
+        "bundle": true,
+        "main": "apps/logger-service/src/functions/get.ts",
+        "tsConfig": "apps/logger-service/tsconfig.app.json",
+        "assets": ["apps/logger-service/src/assets"],
+        "generatePackageJson": false,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "buildStream": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "platform": "node",
+        "outputPath": "dist/apps/logger-service",
+        "format": ["cjs"],
+        "bundle": true,
+        "main": "apps/logger-service/src/functions/stream.ts",
+        "tsConfig": "apps/logger-service/tsconfig.app.json",
+        "assets": ["apps/logger-service/src/assets"],
+        "generatePackageJson": false,
+        "esbuildOptions": {
+          "sourcemap": true,
+          "outExtension": {
+            ".js": ".js"
+          }
+        }
+      },
+      "configurations": {
+        "development": {},
+        "production": {
+          "esbuildOptions": {
+            "sourcemap": false,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        }
+      }
+    },
+    "build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          "npx nx run logger-service:buildSet",
+          "npx nx run logger-service:buildGet",
+          "npx nx run logger-service:buildStream"
+        ],
+        "parallel": true
+      }
+    },
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "production",
+      "options": {
+        "buildTarget": "logger-service:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "logger-service:build:development"
+        },
+        "production": {
+          "buildTarget": "logger-service:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}
