@@ -1,5 +1,5 @@
 import { DynamoDBClient, ScanCommand } from "@aws-sdk/client-dynamodb";
-import { PutCommand, PutCommandInput } from "@aws-sdk/lib-dynamodb";
+import { DeleteCommand, PutCommand, PutCommandInput } from "@aws-sdk/lib-dynamodb";
 import { randomUUID } from "crypto";
 
 const REGION = "eu-north-1";
@@ -28,7 +28,7 @@ export async function setItems(tableName: string, item: Record<string, string>) 
         const params: PutCommandInput = {
             TableName: tableName,
             Item: {
-                id: randomUUID(),
+                id: item.id,
                 timestamp: item.timestamp,
                 message: item.message,
                 metric: item.metric
@@ -41,6 +41,22 @@ export async function setItems(tableName: string, item: Record<string, string>) 
         return true;
     } catch (err) {
         console.log("Error Putting:", err);
+        return false;
+    }
+}
+
+export async function deleteItem(tableName: string, id: string) {
+    try {
+        const params = {
+            TableName: tableName,
+            Key: {
+                id: id
+            }
+        };
+        const command = new DeleteCommand(params);
+        const data = await dynamodbClient.send(command);
+        return true;
+    } catch (err) {
         return false;
     }
 }
