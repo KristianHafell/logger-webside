@@ -41,57 +41,6 @@ export async function setItemsInTable(tableName: string, items: Record<string, s
     }
 }
 
-export async function deleteItemInTableById(tableName: string, id: string) {
-    const isSuccessful = await deleteItem(tableName, id);
-    if (isSuccessful) {
-        return {
-            statusCode: 200,
-            body: JSON.stringify({message: "Deleted"})
-        };
-    } else {
-        return {
-            statusCode: 404,
-            body: JSON.stringify({message: "not Successful deleteItemById"})
-        };
-    }
-}
-
-export async function streamConnectionOnline(connection: Record<string, string>) {
-    try {
-        if (connection.endpoint === undefined) {
-            return {
-                statusCode: 404,
-                body: JSON.stringify({message: "connection.endpoint === undefined"})
-            };
-        }
-        const apigwManagmentAPI = new ApiGatewayManagementApiClient({ 
-            apiVersion: "2018-11-29",
-            endpoint: connection.endpoint
-        });
-    
-        const text = "test";
-    
-        const input = {
-            ConnectionId: connection.ConnectionId,
-            Data: text
-        };
-        const command = new PostToConnectionCommand(input);
-        await apigwManagmentAPI.send(command);
-    
-        return {
-            statusCode: 200,
-            body: JSON.stringify({message: "OK"})
-        }
-    } catch (error) {
-        return {
-            statusCode: 500,
-            body: JSON.stringify({message: "Error" + error.message})
-        };
-    
-       }
-    
-}
-
 export async function itemIsInTable(tableName: string, targetId: string) {
     const items = await getItems(tableName);
     console.log("items: ", items);
@@ -107,3 +56,56 @@ export async function itemIsInTable(tableName: string, targetId: string) {
         };
     }
 }
+
+export async function deleteItemInTableById(tableName: string, id: string) {
+    const isSuccessful = await deleteItem(tableName, id);
+    if (isSuccessful) {
+        return {
+            statusCode: 200,
+            body: JSON.stringify({message: "Deleted"})
+        };
+    } else {
+        return {
+            statusCode: 404,
+            body: JSON.stringify({message: "not Successful deleteItemById"})
+        };
+    }
+}
+
+export async function streamConnectionOnline(connection: Record<string, string>, text: Record<string, string>) {
+    try {
+        if (connection.endpoint === undefined) {
+            return {
+                statusCode: 404,
+                body: JSON.stringify({message: "connection.endpoint === undefined"})
+            };
+        }
+        const apigwManagmentAPI = new ApiGatewayManagementApiClient({ 
+            apiVersion: "2018-11-29",
+            endpoint: connection.endpoint
+        });
+    
+        const message = { id: {S: text.id}, message: {S: text.message}, metric: {S: text.metric} };
+    
+        const input = {
+            ConnectionId: connection.ConnectionId,
+            Data: JSON.stringify(message)
+        };
+        const command = new PostToConnectionCommand(input);
+        await apigwManagmentAPI.send(command);
+    
+        return {
+            statusCode: 200,
+            body: JSON.stringify({message: "OK"})
+        }
+    } catch (error) {
+        return {
+            statusCode: 500,
+            body: JSON.stringify({message: "Error " + error.message})
+        };
+    
+       }
+    
+}
+
+
