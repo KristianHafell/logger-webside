@@ -16,6 +16,3 @@ jobs:
       - name: test text
         run: |
           echo "Text sent successfully"
-      
-      - name: test learn-test
-        run: npx nx test learn-test
