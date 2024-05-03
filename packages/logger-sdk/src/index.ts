@@ -31,7 +31,7 @@ export async function setItems(tableName: string, item: Record<string, string>) 
                 id: item.id,
                 timestamp: item.timestamp,
                 message: item.message,
-                metric: item.metric
+                metric: "test"
             }
         };
         console.log("params is set", params.Item);
