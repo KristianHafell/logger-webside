@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - dev
+  commit:
+    branches:
+      - dev
 
 jobs:
   write_test:
