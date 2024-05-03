@@ -1,30 +1,44 @@
-name: pulumi-up-on-merge
+name: dynamoDB-automate
 
 on:
   pull_request:
-    types: [closed]
     branches:
-      - main
+      - test-main
 
 jobs:
-  pulumi-up:
+  write_test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Login to Pulumi
-        uses: pulumi/actions/cli@v2
+      - name: test text
+        run: |
+          echo "Text sent successfully"
+  test: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
         with:
-          args: login
+          node-version: '18.x'
+      - name: install nx
+        run: npm install
+      - run: npx nx test learn-test
 
-      - name: Select Pulumi stack
-        uses: pulumi/actions/cli@v2
+  pulumi-up:
+    runs-on: ubuntu-latest
+    needs: test
+    if: ${{ needs.test.result == 'success' }}  # Only run if tests passed
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
         with:
-          args: stack select dev-logger-service
-
-      - name: Update resources
-        uses: pulumi/actions/cli@v2
-        with:
-          args: up --yes
+          node-version: '18.x'
+      - run: cd apps/logger-service/provisioning
+      - run: pulumi up -y
