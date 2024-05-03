@@ -18,9 +18,19 @@ jobs:
           echo "Text sent successfully"
       - name: test file
         run: |
-          echo "$cat ett-eller-annet.txt"
-
+          echo "$cat ett-eller-annet.js"
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: npx nx build learn-test
   test: 
+    needs: build
     runs-on: ubuntu-latest
     steps: 
       - name: checkout repo
@@ -30,3 +40,4 @@ jobs:
         with:
           node-version: '18.x'
       - run: npx nx test learn-test
+
