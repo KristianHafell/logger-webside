@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - automate-dynamoDB
+    paths:
+      - 'apps/learn-test/src/main.spec.ts'
 
 jobs:
   write_test:
