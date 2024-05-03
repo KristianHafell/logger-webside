@@ -1,0 +1,22 @@
+name: learn-test-test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  add-test:
+    name: add-test
+    runs-on: [ubuntu-latest, macos-latest]
+    steps:
+
+      - name: Create files that will be uploaded
+        run: |
+          mkdir -p artifact-path
+          echo -n 'hello from file 1' > artifact-path/first.txt
