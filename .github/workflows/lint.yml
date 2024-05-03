@@ -18,7 +18,7 @@ jobs:
           echo "Text sent successfully"
       - name: test file
         run: |
-          echo "$cat ett-eller-annet.js"
+          cat ett-eller-annet.js
   build:
     runs-on: ubuntu-latest
     steps: 
@@ -30,7 +30,6 @@ jobs:
           node-version: '18.x'
       - run: npx nx build learn-test
   test: 
-    needs: build
     runs-on: ubuntu-latest
     steps: 
       - name: checkout repo
