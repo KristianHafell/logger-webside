@@ -42,6 +42,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18.x'
+      - name: install nx
+        run: npm install
       - run: npx nx test learn-test
 
       
