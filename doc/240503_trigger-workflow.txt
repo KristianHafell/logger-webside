@@ -1,0 +1,14 @@
+trigger av workflow
+- hver commit 
+- pull request 
+- på merge
+- ++
+
+how to 
+github actions: filen skal kjøre inn i denne koden
+filter: alle pull request hvis det har vert en endring i en fil som matcher en av filene i filen
+
+
+--
+setup linter i nx
+eslint setup with nx

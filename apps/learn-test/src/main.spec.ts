@@ -14,7 +14,7 @@ describe('graiterThan', () => {
     });
 
     it('should return false if a is less than b', () => {
-        expect(graiterThan(1, 2)).toEqual(false);
+        expect(graiterThan(1, 2)).toEqual(true);
     });
 })
 

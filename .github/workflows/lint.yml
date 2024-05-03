@@ -30,7 +30,7 @@ jobs:
         with:
           node-version: '18.x'
       - name: install nx
-        run: npm install nx@18.3.4
+        run: npm install nx@18.16.9
       - run: npx nx build learn-test
   test: 
     runs-on: ubuntu-latest
@@ -42,7 +42,7 @@ jobs:
         with:
           node-version: '18.x'
       - name: install nx
-        run: npm install nx@18.3.4
+        run: npm install nx@18.16.9
       - run: npx nx test learn-test
 
       
