@@ -1,0 +1,34 @@
+name: test-learn-test
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - dev
+
+jobs:
+  write-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: test text
+        run: |
+          echo "Text sent successfully"
+  pulumi-up:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - name: install nx
+        run: npm install
+      - run: pulumi up -y
+      
+
