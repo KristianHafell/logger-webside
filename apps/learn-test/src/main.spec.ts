@@ -2,7 +2,6 @@ import { add, graiterThan, getItemsFromTable, setItemsInTable, itemIsInTable, de
 
 jest.setTimeout(50000)
 
-
 describe('add', () => {
     it('should add two numbers', () => {
         expect(add(1, 2)).toEqual(3);
