@@ -13,6 +13,5 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: test text
-        run: |
-          echo "Text sent successfully"
+      - name: Run tests
+        run: npx nx test learn-test --file=apps/learn-test/src/main.spec.ts
