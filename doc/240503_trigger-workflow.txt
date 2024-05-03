@@ -1,5 +1,5 @@
 trigger av workflow
-- hver commit 
+- hver commit (done)
 - pull request 
 - på merge
 - ++
@@ -12,3 +12,7 @@ filter: alle pull request hvis det har vert en endring i en fil som matcher en a
 --
 setup linter i nx
 eslint setup with nx
+
+
+--
+triggre 'pulumi up -y' when merge (big boy stuff)
