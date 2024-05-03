@@ -3,7 +3,7 @@ name: Create Test File
 on:
   push:
     branches:
-      - main
+      - dev
 
 jobs:
   create_file:
@@ -15,13 +15,4 @@ jobs:
 
       - name: Create Test File
         run: |
-          echo "This is a test file" > test.txt
           echo "File created successfully"
-
-      - name: Commit and push
-        run: |
-          git config --local user.email "kristianhafell@gmail.com"
-          git config --local user.name "Kristian A Hafell"
-          git add test.txt
-          git commit -m "Add test file"
-          git push
