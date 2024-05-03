@@ -17,3 +17,9 @@ jobs:
         run: |
           echo "This is a test file" > test.txt
           echo "File created successfully"
+
+      - name: Commit and push
+        run: |
+          git add test.txt
+          git commit -m "Add test file"
+          git push
