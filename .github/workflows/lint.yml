@@ -1,27 +1,47 @@
-name: Create Test File
+name: test-learn-test
 
 on:
   push:
     branches:
-      - main
+      - automate-dynamoDB
 
 jobs:
-  create_file:
+  write_test:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create Test File
+      - name: test text
         run: |
-          echo "This is a test file" > test.txt
-          echo "File created successfully"
+          echo "Text sent successfully"
+      - name: test file
+        run: |
+          cat path/to/your/file.js
 
-      - name: Commit and push
-        run: |
-          git config --local user.email "kristianhafell@gmail.com"
-          git config --local user.name "Kristian A Hafell"
-          git add test.txt
-          git commit -m "Add test file"
-          git push
+  build:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - name: install nx
+        run: npm install
+      - run: npx nx build learn-test
+
+  test: 
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - name: install nx
+        run: npm install
+      - run: npx nx test learn-test
