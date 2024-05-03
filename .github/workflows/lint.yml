@@ -1,12 +1,12 @@
 name: test-if-test
 
+
 on:
   push:
     branches:
       - dev
-  commit:
-    branches:
-      - dev
+  status: 
+    - 'completed'
 
 jobs:
   write_test:
@@ -46,4 +46,14 @@ jobs:
       - name: install nx
         run: npm install nx@18.3.4
       - run: npx nx test learn-test
+  if_error_or_failure:
+    runs-on: ubuntu-latest
+    if: >-
+      github.event.state == 'error' ||
+      github.event.state == 'failure'
+    steps:
+      - env:
+          DESCRIPTION: ${{ github.event.description }}
+        run: |
+          echo The status is error or failed: $DESCRIPTION
 
