@@ -29,11 +29,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-      - run: npm i
+      - name: install nx
+        run: npm install nx@20.12.1
       - run: npx nx build learn-test
   test: 
     runs-on: ubuntu-latest
-    depends-on: build
     steps: 
       - name: checkout repo
         uses: actions/checkout@v3
@@ -41,6 +41,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
+      - name: install nx
+        run: npm install nx@20.12.1
       - run: npx nx test learn-test
 
       
