@@ -3,7 +3,7 @@ name: dynamoDB-automate
 on:
   pull_request:
     branches:
-      - automate-dynamoDB
+      - test-main
 
 jobs:
   write_test:
