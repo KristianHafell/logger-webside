@@ -1,6 +1,6 @@
 import { add, graiterThan, getItemsFromTable, setItemsInTable, itemIsInTable, deleteItemInTableById, streamConnectionOnline } from './main';
 
-jest.setTimeout(50000)
+jest.setTimeout(50001)
 
 describe('add', () => {
     it('should add two numbers', () => {
