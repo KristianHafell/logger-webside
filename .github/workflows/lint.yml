@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       - name: Create Test File
         run: |
@@ -18,6 +20,8 @@ jobs:
 
       - name: Commit and push
         run: |
+          git config --local user.email "kristianhafell@gmail.com"
+          git config --local user.name "Kristian A Hafell"
           git add test.txt
           git commit -m "Add test file"
           git push
