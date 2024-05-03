@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create Test File
+      - name: test text
         run: |
-          echo "File created successfully"
+          echo "Text sent successfully"
+      
+      - name: test learn-test
+        run: npx nx test learn-test
