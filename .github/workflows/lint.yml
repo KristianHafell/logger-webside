@@ -18,7 +18,7 @@ jobs:
           echo "Text sent successfully"
       - name: test file
         run: |
-          cat path/to/your/file.js
+          cat ett-eller-annet.ts
 
   build:
     runs-on: ubuntu-latest
