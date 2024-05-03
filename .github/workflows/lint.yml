@@ -30,12 +30,18 @@ jobs:
         with:
           node-version: '18.x'
       - name: install nx
-        run: npm install nx@18.3.4
+        run: npm install
       - run: npx nx build learn-test
   test: 
     runs-on: ubuntu-latest
     needs: build
     steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
       - run: npx nx test learn-test
 
       
