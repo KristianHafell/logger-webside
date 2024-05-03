@@ -1,1 +1,1 @@
-console.log("running ett eller annet");
+console.log("running ett eller annet:)");
