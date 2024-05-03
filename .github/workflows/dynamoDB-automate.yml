@@ -1,0 +1,30 @@
+name: dynamoDB-automate
+
+on:
+  merge:
+    branches:
+      - automate-dynamoDB
+
+jobs:
+  write_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: test text
+        run: |
+          echo "Text sent successfully"
+
+  pulumi-up:
+    runs-on: ubuntu-latest
+    steps: 
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+      - run: cd apps/logger-service/provisioning
+      - run: pulumi up -y
