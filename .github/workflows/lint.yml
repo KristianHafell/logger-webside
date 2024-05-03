@@ -1,22 +1,19 @@
-name: learn-test-test
+name: Create Test File
 
 on:
   push:
     branches:
       - main
-  pull_request:
-
-permissions:
-  actions: read
-  contents: read
 
 jobs:
-  add-test:
-    name: add-test
-    runs-on: [ubuntu-latest, macos-latest]
-    steps:
+  create_file:
+    runs-on: ubuntu-latest
 
-      - name: Create files that will be uploaded
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create Test File
         run: |
-          mkdir -p artifact-path
-          echo -n 'hello from file 1' > artifact-path/first.txt
+          echo "This is a test file" > test.txt
+          echo "File created successfully"
